@@ -35,10 +35,39 @@ public class TicTacToe
                 }
 
             board[index] = isPlayer1Turn ? "X" : "O";
+
+            if (CheckWinner())
+            {
+                Console.Clear();
+                Board();
+                Console.WriteLine(isPlayer1Turn ? "Player 1 Wins!" : "Player 2 Wins!");
+                break;
+            }
+
+            if (board.Count(cell => cell == "X" || cell == "O") == 9)
+            {
+                Console.Clear();
+                Board();
+                Console.WriteLine("Draw!");
+                break;
+            }
             isPlayer1Turn = !isPlayer1Turn;
         }
     }
-  
+
+    public bool CheckWinner()
+    {
+        bool row1 = board[0] == board[1] && board[1] == board[2] && (board[0]=="X" || board[0] == "O");
+        bool row2 = board[3] == board[4] && board[4] == board[5]&& (board[3]=="X" || board[3] == "O");;
+        bool row3 = board[6] == board[7] && board[7] == board[8]&& (board[6]=="X" || board[6] == "O");;
+        bool col1 = board[0] == board[3] && board[3] == board[6]&& (board[0]=="X" || board[0] == "O");;
+        bool col2 = board[1] == board[4] && board[4] == board[7]&& (board[1]=="X" || board[1] == "O");;
+        bool col3 = board[2] == board[5] && board[5] == board[8]&& (board[2]=="X" || board[2] == "O");;
+        bool diag1 = board[0] == board[4] && board[4] == board[8]&& (board[0]=="X" || board[0] == "O");;
+        bool diag2 = board[2] == board[4] && board[4] == board[6]&& (board[2]=="X" || board[2] == "O");;
+
+        return row1 || row2 || row3 || col1 || col2 || col3 ||diag1 || diag2;
+    }
     public void Board()
     {
         for (int i = 0; i < 3; i++)

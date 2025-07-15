@@ -12,3 +12,4 @@ C:\Users\pawel\OneDrive\Pulpit\rozwiazania_zadan\TicTacToe\TicTacToe\obj\Debug\n
 C:\Users\pawel\OneDrive\Pulpit\rozwiazania_zadan\TicTacToe\TicTacToe\obj\Debug\net9.0\TicTacToe.pdb
 C:\Users\pawel\OneDrive\Pulpit\rozwiazania_zadan\TicTacToe\TicTacToe\obj\Debug\net9.0\TicTacToe.genruntimeconfig.cache
 C:\Users\pawel\OneDrive\Pulpit\rozwiazania_zadan\TicTacToe\TicTacToe\obj\Debug\net9.0\ref\TicTacToe.dll
+C:\Users\pawel\OneDrive\Pulpit\rozwiazania_zadan\TicTacToe\TicTacToe\obj\Debug\net9.0\TicTacToe.sourcelink.json
