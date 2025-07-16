@@ -6,7 +6,7 @@ public class TicTacToe
 {
     string[] board = new string[9] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
     bool isPlayer1Turn = true;
-
+    bool isVsComputer = false;
     public void Turns()
     {
         while (true)
@@ -17,7 +17,28 @@ public class TicTacToe
                 Console.WriteLine("Player 1 Turn");
             else
                 Console.WriteLine("Player 2 Turn");
-            string input = Console.ReadLine();
+
+            string input;
+
+            if (!isPlayer1Turn && isVsComputer)
+            {
+                Random random = new Random();
+                List<int> freePlace = board
+                    .Select((val, idx) => new { val, idx })
+                    .Where(x => x.val != "X" && x.val != "O")
+                    .Select(x => x.idx)
+                    .ToList();
+                
+                int chosen = freePlace[random.Next(freePlace.Count)];
+                input = (chosen + 1).ToString();
+                
+                Console.WriteLine($"Computer chooses: {input}");
+            }
+            else
+            {
+                input = Console.ReadLine();
+            }
+            
             if (!int.TryParse(input , out int number) || number < 1 || number > 9)
             {
                 Console.WriteLine("You chose number that is not on the board. Try again.");
@@ -54,19 +75,29 @@ public class TicTacToe
             isPlayer1Turn = !isPlayer1Turn;
         }
     }
-
+    
     public bool CheckWinner()
     {
         bool row1 = board[0] == board[1] && board[1] == board[2] && (board[0]=="X" || board[0] == "O");
-        bool row2 = board[3] == board[4] && board[4] == board[5]&& (board[3]=="X" || board[3] == "O");;
-        bool row3 = board[6] == board[7] && board[7] == board[8]&& (board[6]=="X" || board[6] == "O");;
-        bool col1 = board[0] == board[3] && board[3] == board[6]&& (board[0]=="X" || board[0] == "O");;
-        bool col2 = board[1] == board[4] && board[4] == board[7]&& (board[1]=="X" || board[1] == "O");;
-        bool col3 = board[2] == board[5] && board[5] == board[8]&& (board[2]=="X" || board[2] == "O");;
-        bool diag1 = board[0] == board[4] && board[4] == board[8]&& (board[0]=="X" || board[0] == "O");;
-        bool diag2 = board[2] == board[4] && board[4] == board[6]&& (board[2]=="X" || board[2] == "O");;
+        bool row2 = board[3] == board[4] && board[4] == board[5]&& (board[3]=="X" || board[3] == "O");
+        bool row3 = board[6] == board[7] && board[7] == board[8]&& (board[6]=="X" || board[6] == "O");
+        bool col1 = board[0] == board[3] && board[3] == board[6]&& (board[0]=="X" || board[0] == "O");
+        bool col2 = board[1] == board[4] && board[4] == board[7]&& (board[1]=="X" || board[1] == "O");
+        bool col3 = board[2] == board[5] && board[5] == board[8]&& (board[2]=="X" || board[2] == "O");
+        bool diag1 = board[0] == board[4] && board[4] == board[8]&& (board[0]=="X" || board[0] == "O");
+        bool diag2 = board[2] == board[4] && board[4] == board[6]&& (board[2]=="X" || board[2] == "O");
 
         return row1 || row2 || row3 || col1 || col2 || col3 ||diag1 || diag2;
+    }
+
+    public TicTacToe(bool vsComputer = false)
+    {
+        isVsComputer = vsComputer;
+    }
+    public void ResetBoard()
+    {
+        board = new string[9] {"1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        isPlayer1Turn = true;
     }
     public void Board()
     {
